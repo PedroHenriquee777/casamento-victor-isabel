@@ -25,6 +25,7 @@ enum RsvpStatus {
 model Wedding {
   id               String   @id @default("main")
   groomName        String
+  brideName        String
   eventAt          DateTime
   timeZone         String   @default("America/Sao_Paulo")
   maxGiftsPerGuest Int?
@@ -80,6 +81,7 @@ model Gift {
   category    String  @default("")
   quantity    Int?
   sortOrder   Int     @default(0)
+  imageUrl    String
   active      Boolean @default(true)
 
   wedding      Wedding           @relation(fields: [weddingId], references: [id], onDelete: Cascade)
@@ -90,11 +92,11 @@ model Gift {
 }
 
 model GiftReservation {
-  id            String   @id @default(cuid())
-  giftId        String
-  guestId       String
-  createdAt     DateTime @default(now())
-  slotKey String? @unique @map("exclusiveLock")
+  id        String   @id @default(cuid())
+  giftId    String
+  guestId   String
+  createdAt DateTime @default(now())
+  slotKey   String?  @unique @map("exclusiveLock")
 
   gift  Gift  @relation(fields: [giftId], references: [id], onDelete: Cascade)
   guest Guest @relation(fields: [guestId], references: [id], onDelete: Cascade)
