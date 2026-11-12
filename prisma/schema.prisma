@@ -1,0 +1,105 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum InviteKind {
+  GUEST
+  GODPARENT
+}
+
+enum GodparentRole {
+  PADRINHO
+  MADRINHA
+}
+
+enum RsvpStatus {
+  CONFIRMED
+  DECLINED
+}
+
+model Wedding {
+  id               String   @id @default("main")
+  groomName        String
+  eventAt          DateTime
+  timeZone         String   @default("America/Sao_Paulo")
+  maxGiftsPerGuest Int?
+  content          Json
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  guests Guest[]
+  gifts  Gift[]
+
+  @@map("weddings")
+}
+
+model Guest {
+  id            String         @id @default(cuid())
+  weddingId     String
+  token         String         @unique
+  name          String
+  kind          InviteKind     @default(GUEST)
+  godparentRole GodparentRole?
+  phone         String?
+  notes         String?
+  openedAt      DateTime?
+  createdAt     DateTime       @default(now())
+
+  wedding      Wedding           @relation(fields: [weddingId], references: [id], onDelete: Cascade)
+  rsvp         Rsvp?
+  reservations GiftReservation[]
+
+  @@index([weddingId])
+  @@map("guests")
+}
+
+model Rsvp {
+  id          String     @id @default(cuid())
+  guestId     String     @unique
+  status      RsvpStatus
+  message     String?
+  respondedAt DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+
+  guest Guest @relation(fields: [guestId], references: [id], onDelete: Cascade)
+
+  @@map("rsvps")
+}
+
+model Gift {
+  id          String  @id @default(cuid())
+  weddingId   String
+  name        String
+  description String
+  priceCents  Int?
+  category    String  @default("")
+  quantity    Int?
+  sortOrder   Int     @default(0)
+  active      Boolean @default(true)
+
+  wedding      Wedding           @relation(fields: [weddingId], references: [id], onDelete: Cascade)
+  reservations GiftReservation[]
+
+  @@index([weddingId, sortOrder])
+  @@map("gifts")
+}
+
+model GiftReservation {
+  id            String   @id @default(cuid())
+  giftId        String
+  guestId       String
+  createdAt     DateTime @default(now())
+  slotKey String? @unique @map("exclusiveLock")
+
+  gift  Gift  @relation(fields: [giftId], references: [id], onDelete: Cascade)
+  guest Guest @relation(fields: [guestId], references: [id], onDelete: Cascade)
+
+  @@unique([giftId, guestId])
+  @@index([guestId])
+  @@map("gift_reservations")
+}

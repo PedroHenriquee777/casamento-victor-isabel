@@ -1,0 +1,15 @@
+node_modules
+.next
+out
+.env
+.env.local
+env
+prisma/migrations
+prisma/seed.ts
+convidados-exemplo.csv
+*.tsbuildinfo
+next-env.d.ts
+# Cliente Prisma gerado (rode `npm run db:generate`)
+src/generated
+# Saídas locais
+links-convidados.csv
