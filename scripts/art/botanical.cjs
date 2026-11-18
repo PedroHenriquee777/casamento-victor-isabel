@@ -94,7 +94,11 @@ function pearlsAround(cx, cy, rad, n, r, sMin = 2.6, sMax = 4.6) {
   for (let i = 0; i < n; i++) {
     const a = r() * Math.PI * 2;
     const d = rad * Math.sqrt(r());
-    s += pearl(cx + Math.cos(a) * d, cy + Math.sin(a) * d, lerp(sMin, sMax, r()));
+    s += pearl(
+      cx + Math.cos(a) * d,
+      cy + Math.sin(a) * d,
+      lerp(sMin, sMax, r()),
+    );
   }
   return s;
 }
@@ -179,21 +183,42 @@ function leaf(x, y, ang, L, W, o = {}) {
 function bez(P, t) {
   const u = 1 - t;
   return [
-    u * u * u * P[0][0] + 3 * u * u * t * P[1][0] + 3 * u * t * t * P[2][0] + t * t * t * P[3][0],
-    u * u * u * P[0][1] + 3 * u * u * t * P[1][1] + 3 * u * t * t * P[2][1] + t * t * t * P[3][1],
+    u * u * u * P[0][0] +
+      3 * u * u * t * P[1][0] +
+      3 * u * t * t * P[2][0] +
+      t * t * t * P[3][0],
+    u * u * u * P[0][1] +
+      3 * u * u * t * P[1][1] +
+      3 * u * t * t * P[2][1] +
+      t * t * t * P[3][1],
   ];
 }
 function bezTan(P, t) {
   const u = 1 - t;
-  const dx = 3 * u * u * (P[1][0] - P[0][0]) + 6 * u * t * (P[2][0] - P[1][0]) + 3 * t * t * (P[3][0] - P[2][0]);
-  const dy = 3 * u * u * (P[1][1] - P[0][1]) + 6 * u * t * (P[2][1] - P[1][1]) + 3 * t * t * (P[3][1] - P[2][1]);
+  const dx =
+    3 * u * u * (P[1][0] - P[0][0]) +
+    6 * u * t * (P[2][0] - P[1][0]) +
+    3 * t * t * (P[3][0] - P[2][0]);
+  const dy =
+    3 * u * u * (P[1][1] - P[0][1]) +
+    6 * u * t * (P[2][1] - P[1][1]) +
+    3 * t * t * (P[3][1] - P[2][1]);
   return [dx, dy];
 }
 const dirDeg = ([dx, dy]) => deg(Math.atan2(dx, -dy)); // 0° = para cima
 
 /** Ramo com folhas ao longo de uma curva de Bézier. */
 function spray(P, o, r) {
-  const { n = 10, L = 60, W = 28, round = true, spread = 48, tipPearls = true, light = false, taper = 0.55 } = o;
+  const {
+    n = 10,
+    L = 60,
+    W = 28,
+    round = true,
+    spread = 48,
+    tipPearls = true,
+    light = false,
+    taper = 0.55,
+  } = o;
   const stem = `M${f(P[0][0])} ${f(P[0][1])} C ${f(P[1][0])} ${f(P[1][1])} ${f(P[2][0])} ${f(P[2][1])} ${f(P[3][0])} ${f(P[3][1])}`;
   let s =
     `<path d="${stem}" fill="none" stroke="#FFFFFF" stroke-opacity=".95" stroke-width="3.6" stroke-linecap="round"/>` +
@@ -206,12 +231,32 @@ function spray(P, o, r) {
     const sc = 1 - taper * t;
     const l = L * sc * (0.88 + r() * 0.24);
     const w = W * sc * (0.9 + r() * 0.2);
-    s += leaf(x, y, base + side * (spread + (r() - 0.5) * 14), l, w, { round, light: light ? r() > 0.3 : r() > 0.75, noVeins: o.noVeins });
+    s += leaf(x, y, base + side * (spread + (r() - 0.5) * 14), l, w, {
+      round,
+      light: light ? r() > 0.3 : r() > 0.75,
+      noVeins: o.noVeins,
+    });
   }
   // folha terminal
   const tipDir = dirDeg(bezTan(P, 1));
-  s += leaf(P[3][0], P[3][1], tipDir, L * (1 - taper) * 0.95, W * (1 - taper) * 0.95, { round, noVeins: o.noVeins });
-  if (tipPearls) s += pearlsAround(P[3][0] + Math.sin((tipDir * Math.PI) / 180) * L * 0.5, P[3][1] - Math.cos((tipDir * Math.PI) / 180) * L * 0.5, 9, 3, r, 2.2, 3.6);
+  s += leaf(
+    P[3][0],
+    P[3][1],
+    tipDir,
+    L * (1 - taper) * 0.95,
+    W * (1 - taper) * 0.95,
+    { round, noVeins: o.noVeins },
+  );
+  if (tipPearls)
+    s += pearlsAround(
+      P[3][0] + Math.sin((tipDir * Math.PI) / 180) * L * 0.5,
+      P[3][1] - Math.cos((tipDir * Math.PI) / 180) * L * 0.5,
+      9,
+      3,
+      r,
+      2.2,
+      3.6,
+    );
   return s;
 }
 
@@ -230,7 +275,9 @@ function berries(P, n, r, size = 4.6) {
     const len = 12 + r() * 12;
     const ex = x + Math.sin(a) * len;
     const ey = y - Math.cos(a) * len;
-    s += `<path d="M${f(x)} ${f(y)} L${f(ex)} ${f(ey)}" stroke="${C.line}" stroke-opacity=".6" stroke-width="1" fill="none"/>` + pearl(ex, ey, size * (0.8 + r() * 0.5));
+    s +=
+      `<path d="M${f(x)} ${f(y)} L${f(ex)} ${f(ey)}" stroke="${C.line}" stroke-opacity=".6" stroke-width="1" fill="none"/>` +
+      pearl(ex, ey, size * (0.8 + r() * 0.5));
   }
   const [tx, ty] = bez(P, 1);
   s += pearl(tx, ty, size * 1.1);
@@ -243,11 +290,17 @@ function wash(cx, cy, rad, color, op, r, n = 12) {
   for (let i = 0; i < n; i++) {
     const a = (i / n) * Math.PI * 2;
     const rr = rad * (0.7 + r() * 0.5);
-    pts.push([cx + Math.cos(a) * rr, cy + Math.sin(a) * rr * (0.85 + r() * 0.3)]);
+    pts.push([
+      cx + Math.cos(a) * rr,
+      cy + Math.sin(a) * rr * (0.85 + r() * 0.3),
+    ]);
   }
   let d = `M${f(pts[0][0])} ${f(pts[0][1])}`;
   for (let i = 0; i < n; i++) {
-    const p0 = pts[(i - 1 + n) % n], p1 = pts[i], p2 = pts[(i + 1) % n], p3 = pts[(i + 2) % n];
+    const p0 = pts[(i - 1 + n) % n],
+      p1 = pts[i],
+      p2 = pts[(i + 1) % n],
+      p3 = pts[(i + 2) % n];
     const c1 = [p1[0] + (p2[0] - p0[0]) / 6, p1[1] + (p2[1] - p0[1]) / 6];
     const c2 = [p2[0] - (p3[0] - p1[0]) / 6, p2[1] - (p3[1] - p1[1]) / 6];
     d += ` C ${f(c1[0])} ${f(c1[1])} ${f(c2[0])} ${f(c2[1])} ${f(p2[0])} ${f(p2[1])}`;
@@ -259,4 +312,23 @@ function svgDoc(w, h, body) {
   return `<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}">${defs()}${body}</svg>`;
 }
 
-module.exports = { rng, lerp, f, C, defs, svgDoc, rosette, blossom, bud, leaf, spray, berries, pearl, pearlsAround, wash, bez, bezTan, dirDeg };
+module.exports = {
+  rng,
+  lerp,
+  f,
+  C,
+  defs,
+  svgDoc,
+  rosette,
+  blossom,
+  bud,
+  leaf,
+  spray,
+  berries,
+  pearl,
+  pearlsAround,
+  wash,
+  bez,
+  bezTan,
+  dirDeg,
+};

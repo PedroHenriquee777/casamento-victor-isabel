@@ -4,16 +4,16 @@ export const WEDDING_DEFAULTS = {
   id: "main",
   groomName: "Victor",
   brideName: "Isabel",
-  eventAt: "2027-04-17T17:00:00-03:00",
+  eventAt: "2027-04-03T16:00:00-03:00",
   timeZone: "America/Sao_Paulo",
   maxGiftsPerGuest: 2 as number | null,
 };
 
 export const WEDDING_CONTENT: WeddingContent = {
   tagline:
-    "Com o coração cheio de alegria, convidamos você para viver conosco o dia em que prometemos amar para sempre.",
+    "Com a bênção de Deus e o amor que nos une, convidamos você para celebrar o início de uma vida inteira caminhando juntos na fé e no amor.",
   message: [
-    "Há encontros que não são acaso: são destino chegando devagar, em forma de riso fácil e de silêncio bom.",
+    "Há encontros que não são acaso: é o destino devagar chegando, em forma de riso fácil e de silêncio bom",
     "Entre sonhos divididos e caminhos que passaram a ser um só, descobrimos que o amor é, antes de tudo, escolha — feita todos os dias, com carinho e coragem.",
     "Agora, cercados de quem mais amamos, vamos transformar promessa em caminho. Será uma alegria imensa celebrar esse momento com você.",
   ],
@@ -28,12 +28,11 @@ export const WEDDING_CONTENT: WeddingContent = {
     mapMode: "illustrated",
     streetLabel: "Rua General Sampaio",
     marker: "church",
-    note: "Cerimônia religiosa",
+    note: "Nosso local de cerimônia",
   },
   schedule: [
-    { time: "16h30", label: "Recepção dos convidados" },
-    { time: "17h00", label: "Cerimônia" },
-    { time: "18h30", label: "Coquetel e jantar" },
+    { time: "15h30", label: "Horário de Chegada" },
+    { time: "16h00", label: "Cerimônia" },
     { time: "20h00", label: "Festa" },
   ],
   info: [
