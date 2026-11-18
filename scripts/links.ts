@@ -1,4 +1,4 @@
-export const SITE = (process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000").replace(/\/$/, "");
+export const SITE = (process.env.NEXT_PUBLIC_SITE_URL ?? "https://casamento-victor-isabel.vercel.app/").replace(/\/$/, "");
 
 export const csvCell = (s: string) => (/[;"\n]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s);
 

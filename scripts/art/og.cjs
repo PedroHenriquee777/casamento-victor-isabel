@@ -1,4 +1,4 @@
-// Gera src/app/opengraph-image.png (1200x630) — prévia do link no WhatsApp.
+// Gera src/app/opengraph-image.jpg (1200x630) — prévia do link no WhatsApp.
 const path = require("path");
 const fs = require("fs");
 const os = require("os");
@@ -19,7 +19,7 @@ h1 i{font-size:76px;color:#92a8d1;padding:0 .3em}.d{font-style:italic;font-size:
 <img class=a src="${f("public/art/corner-tl.webp")}" style="left:-60px;top:-70px;width:560px">
 <img class=a src="${f("public/art/corner-br.webp")}" style="right:-40px;bottom:-60px;width:430px">
 <div class=r></div>
-<div class=c><p class=e>Convite de casamento</p><h1>Victor<i>&amp;</i>Isabel</h1><p class=d>04 de abril de 2027 · Nova Russas, CE</p></div>`;
+<div class=c><p class=e>Convite de casamento</p><h1>Victor<i>&amp;</i>Isabel</h1><p class=d>3 de abril de 2027 · Nova Russas, CE</p></div>`;
 (async () => {
   const b = await chromium.launch();
   const p = await b.newPage({ viewport: { width: 1200, height: 630 } });
@@ -27,7 +27,7 @@ h1 i{font-size:76px;color:#92a8d1;padding:0 .3em}.d{font-style:italic;font-size:
   fs.writeFileSync(tmp, html);
   await p.goto("file://" + tmp, { waitUntil: "networkidle" });
   await p.evaluate(() => document.fonts.ready);
-  await p.screenshot({ path: path.join(root, "src/app/opengraph-image.png") });
+  await p.screenshot({ path: path.join(root, "src/app/opengraph-image.jpg"), type: "jpeg", quality: 85 });
   await b.close();
   console.log("ok");
 })();

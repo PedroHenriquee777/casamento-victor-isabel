@@ -4,6 +4,7 @@ import { Invitation } from "@/components/invitation/Invitation";
 import { firstName } from "@/lib/format";
 import { getRepo, isDemoMode } from "@/lib/repo";
 
+// A disponibilidade dos presentes muda a todo momento: nunca servir do cache.
 export const dynamic = "force-dynamic";
 
 type Props = { params: Promise<{ token: string }> };
@@ -24,8 +25,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title,
     description,
     robots: { index: false, follow: false },
-    openGraph: { title, description, type: "website", locale: "pt_BR", images: [{ url: "/opengraph-image.png", width: 1200, height: 630, alt: couple }] },
-    twitter: { card: "summary_large_image", title, description, images: ["/opengraph-image.png"] },
+    openGraph: { title, description, type: "website", locale: "pt_BR", images: [{ url: "/opengraph-image.jpg", width: 1200, height: 630, alt: couple }] },
+    twitter: { card: "summary_large_image", title, description, images: ["/opengraph-image.jpg"] },
   };
 }
 
@@ -33,6 +34,7 @@ export default async function InvitePage({ params }: Props) {
   const { token } = await params;
   const payload = await (await getRepo()).getInvite(token);
   if (!payload) {
+    // Aviso no log do servidor (o convidado só vê a página 404 elegante).
     console.warn(
       `[convite] token "${token}" não encontrado — ` +
         (isDemoMode()

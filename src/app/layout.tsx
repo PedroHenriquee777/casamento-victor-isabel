@@ -10,7 +10,7 @@ import "@fontsource/jost/latin-400.css";
 import "@fontsource/jost/latin-500.css";
 import "./globals.css";
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://casamento-victor-isabel.vercel.app/";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
