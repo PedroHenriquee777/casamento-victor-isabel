@@ -20,7 +20,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const title = god ? `${couple} · Um convite especial` : `${couple} · Convite de casamento`;
   const description = god
     ? `${firstName(guest.name)}, temos um pedido do fundo do coração. Toque no selo para abrir.`
-    : `${firstName(guest.name)}, você(ês) é(são) nosso(s) convidado(s). Clique no link e toque no selo para abrir o convite.`;
+    : `${firstName(guest.name)}, você é nosso(a) convidado(a) especial. Clique no link e toque no selo para abrir o convite.`;
   return {
     title,
     description,
