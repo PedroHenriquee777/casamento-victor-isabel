@@ -267,6 +267,14 @@ const glyphs: Record<string, ReactElement> = {
       <path d="M10.5 24c6-2 13-2 19 1" stroke={D} strokeDasharray="2 2" />
     </>
   ),
+  fan: (
+    <>
+      <circle cx="24" cy="19" r="14" fill={L} />
+      <path d="M24 19c-3-6-1-11 3-11 3 3 2 8-3 11Zm0 0c6-2 11 0 11 4-3 3-8 1-11-4Zm0 0c-1 7-6 9-10 6 0-4 4-7 10-6Z" fill={M} />
+      <circle cx="24" cy="19" r="2.2" fill="#fff" />
+      <path d="M24 33v7M17 41h14" strokeWidth="2.4" />
+    </>
+  ),
   towels: (
     <>
       <rect x="6" y="29" width="36" height="9" rx="2" fill={M} />

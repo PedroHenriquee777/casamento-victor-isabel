@@ -33,28 +33,28 @@ export const WEDDING_CONTENT: WeddingContent = {
   schedule: [
     { time: "15h30", label: "Horário de Chegada" },
     { time: "16h00", label: "Cerimônia" },
-    { time: "20h00", label: "Festa" },
+    { time: "Após a Cerimônia", label: "Recepção dos convidados" },
   ],
   info: [
     {
       icon: "dress",
       title: "Vestimenta",
-      text: "Traje social completo. Sugerimos tons suaves; o branco e o off-white ficam reservados à noiva.",
+      text: "Trajes sociais completos. A cor Azul Serenity fica reservada exclusivamente para as madrinhas.",
     },
     {
       icon: "clock",
       title: "Horários",
-      text: "A cerimônia começa pontualmente às 17h. Chegue com 20 minutos de antecedência para ser recebido com calma.",
+      text: "A cerimônia começa pontualmente às 16h. Chegue com 30 minutos de antecedência para ser recebido com calma.",
     },
     {
       icon: "car",
-      title: "Estacionamento",
-      text: "Recomendamos chegar com antecedência para estacionar com tranquilidade. Se preferir, use aplicativo de transporte.",
+      title: "Recepção após a Cerimônia",
+      text: "Após o encerramento da cerimônia, os convidados serão recebidos para a celebração no Hotel Lima.",
     },
     {
-      icon: "gift",
-      title: "Presentes",
-      text: "Nossa lista está aqui no convite, ao confirmar sua presença. Indicamos presentes nas cores branco, preto, inox ou bambu.",
+      icon: "dress",
+      title: "Vestimenta dos padrinhos & madrinhas",
+      text: "As madrinhas deverão usar Azul Serenity. Os padrinhos deverão usar terno em tom de cinza claro ou Azul Serenity, conforme orientação e traje disponibilizado por nós",
     },
   ],
   godparents: {
@@ -92,7 +92,7 @@ export const WEDDING_CONTENT: WeddingContent = {
     arrival: "15h30",
   },
   rsvp: {
-    deadlineLabel: "Pedimos a gentileza de confirmar até 17 de março de 2027.",
+    deadlineLabel: "Pedimos a gentileza de confirmar até 13 de março de 2027.",
     thanksConfirmed:
       "Que alegria saber que você estará conosco! Mal podemos esperar para celebrar esse dia ao seu lado.",
     thanksDeclined:
@@ -146,6 +146,7 @@ const GIFT_LIST: [string, string, string, string, number][] = [
   ["protetor-colchao", "Protetor de colchão", "Quarto", "mattress", 2],
   ["cortina", "Cortina para sala ou quarto", "Sala", "curtain", 2],
   ["almofadas", "Almofadas", "Sala", "cushions", 2],
+  ["ventilador", "Ventilador", "Sala", "fan", 1],
   [
     "toalhas-banho",
     "Jogos de toalhas de banho e rosto",
