@@ -257,9 +257,6 @@ export function Dashboard({ data, tz, actions }: { data: AdminOverview; tz: stri
         <Stat value={`${taken}/${capacity}`} label="Presentes escolhidos" />
       </div>
 
-      <Section title="Padrinhos e madrinhas" hint={`${godYes} de ${god.length} ${godYes === 1 ? "aceitou" : "aceitaram"} o convite`}>
-        <Godparents rows={god} tz={tz} />
-      </Section>
 
       <Section
         title="Convidados"
