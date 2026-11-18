@@ -15,7 +15,7 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: "Convite de casamento · Victor & Isabel",
-  description: "Você é nosso convidado. Toque no selo para abrir o convite.",
+  description: "Você(ês) é(são) nosso(s) convidado(s) especial(is). Ao clicar, toque no selo para abrir o convite.",
   robots: { index: false, follow: false },
   openGraph: {
     title: "Victor & Isabel · Convite de casamento",
